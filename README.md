@@ -13,14 +13,12 @@ This project generates the automation YAML content to handle **Shelly device sta
    - Copy the `all.yml.tpl` file to `all.yml`.
    - Populate `all.yml` with your Shelly devices.
 
-2. **Register in inventory your ssh connection to Home Assistant or only copy it over from local created file later**
-
 3. **Run the Ansible playbook** to generate the automation:
    ```bash
    ansible-playbook main.yml
    ```
 
-4. **If you dont use ssh connection to Home Assistant, copy the generated `automation.yaml` files content into your automation file in Home Assistant**
+4. **Copy the generated `automation.yaml` files content into your automations file in Home Assistant**
 
 ### Automation Logic:
 
