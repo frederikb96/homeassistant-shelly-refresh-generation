@@ -1,0 +1,12 @@
+---
+- hosts: remote
+  tasks:
+    - name: Load Jinja2 template content
+      set_fact:
+        jinja_content: "{{ lookup('template', 'templates/file.j2') }}"
+
+    - name: Insert Jinja2 block into destination file
+      ansible.builtin.blockinfile:
+        path:  /homeassistant/automations.yaml
+        marker: "# {mark} ANSIBLE MANAGED SHELLY REFRESH TRIGGERS"
+        block: "{{ jinja_content }}"

@@ -5,28 +5,26 @@ This project generates the automation YAML content to handle **Shelly device sta
 ### What it does:
 - Generates the automation YAML content for monitoring Shelly devices and rebooting them when their state becomes "unknown" or "unavailable."
 - Automates the reboot process to refresh the state and ensure proper status reporting to Home Assistant.
-- The devices are listed in the `vars.yml` file, and the generated automation includes all listed devices.
+- The devices are listed in the `all.yml` file, and the generated automation includes all listed devices.
 
 ### Quickstart:
 
-1. **Prepare the `vars.yml` file**:
-   - Copy the `vars.yml.template` file to `vars.yml`.
-   - Populate `vars.yml` with your Shelly devices.
+1. **Prepare the `all.yml` file**:
+   - Copy the `all.yml.tpl` file to `all.yml`.
+   - Populate `all.yml` with your Shelly devices.
 
-2. **Run the Ansible playbook** to generate the automation:
+2. **Register in inventory your ssh connection to Home Assistant**
+
+3. **Run the Ansible playbook** to generate the automation:
    ```bash
-   ansible-playbook playbook.yml
+   ansible-playbook main.yml
    ```
-
-3. **Copy the generated automation**:
-   - After the playbook runs, a file called `automation.yaml` will be created.
-   - Copy the content of this file into the **YAML view** of a new automation in the Home Assistant UI.
 
 ### Automation Logic:
 
 The generated automation does the following:
 - **Triggers**: Watches for Shelly device states (`unavailable` or `unknown`) as well as the startup of Home Assistant.
-- **Actions**: If a Shelly device is in an undesirable state (i.e., "unknown" or "unavailable"), it triggers a reboot via MQTT after a 1-minute delay.
+- **Actions**: If a Shelly device is in an undesirable state (i.e., "unknown" or "unavailable"), it triggers a reboot via MQTT.
   
 ### Why is this necessary?
 Occasionally, Shelly devices can get stuck in an "unknown" or "unavailable" state, which prevents Home Assistant from getting accurate status updates. This automation forces a reboot to refresh the device state and allow Home Assistant to receive updated information.

@@ -1,0 +1,5 @@
+[local]
+localhost ansible_connection=local
+
+[remote]
+ha ansible_host=ha.tail ansible_user=root

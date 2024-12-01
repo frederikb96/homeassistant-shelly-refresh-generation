@@ -1,0 +1,424 @@
+- id: '1729354006452'
+  alias: shelly_refresh_input
+  description: ''
+  triggers:
+  - trigger: homeassistant
+    event: start
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_bathroom_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_bathroom_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_freddy_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_freddy_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_hall1_1_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_hall1_1_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_hall2_2_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_hall2_2_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_kitchen_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_kitchen_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_livingroom_1_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_livingroom_1_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_livingroom_2_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_livingroom_2_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_medi_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_medi_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_nina_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_nina_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_toilet_input_0
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: state
+    entity_id:
+    - binary_sensor.shelly_toilet_input_0
+    to: unknown
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - trigger: time_pattern
+    minutes: '0'
+    seconds: '0'
+    hours: '0'
+  conditions: []
+  actions:
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - alias: shelly_bathroom
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_bathroom_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_bathroom_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_bathroom/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_freddy
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_freddy_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_freddy_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_freddy/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_hall1_1
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_hall1_1_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_hall1_1_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_hall1_1/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_hall2_2
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_hall2_2_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_hall2_2_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_hall2_2/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_kitchen
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_kitchen_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_kitchen_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_kitchen/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_livingroom_1
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_livingroom_1_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_livingroom_1_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_livingroom_1/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_livingroom_2
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_livingroom_2_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_livingroom_2_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_livingroom_2/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_medi
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_medi_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_medi_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_medi/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_nina
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_nina_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_nina_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shelly_nina/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - alias: shelly_toilet
+    choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_toilet_input_0
+        state: 'on'
+      sequence: []
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.shelly_toilet_input_0
+        state: 'off'
+      sequence: []
+    default:
+    - action: mqtt.publish
+      data:
+        topic: shellies/shelly_toilet/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  mode: queued
+  max: 10

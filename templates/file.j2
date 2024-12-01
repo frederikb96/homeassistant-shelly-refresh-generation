@@ -1,0 +1,28 @@
+{% for device in devices %}
+- id: "shelly_refresh_trigger_{{ device.name }}"
+  alias: shelly_refresh_trigger_{{ device.name }}
+  description: ''
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.{{ device.name }}_input_0
+      to: unknown
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+  conditions: []
+  actions:
+    - action: mqtt.publish
+      data:
+        topic: {{ device.topic }}/rpc
+        payload: '{"id":1, "src":"homeassistant", "method":"Shelly.Reboot"}'
+        qos: '1'
+        retain: false
+    - delay:
+        hours: 0
+        minutes: 1
+        seconds: 0
+        milliseconds: 0
+  mode: single
+{% endfor %}
